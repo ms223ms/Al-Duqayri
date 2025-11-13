@@ -538,6 +538,8 @@
                 <input type="text" id="searchInput" placeholder="ابحث عن منتج...">
             </div>
             <div class="cats" id="catsRow"></div>
+            <!-- زرار الكل -->
+            <div class="cat-pill" id="allCats">الكل</div>
 
             <div class="products" id="productsGrid"></div>
         </div>
@@ -814,6 +816,17 @@
 
             function renderCats() {
                 catsRow.innerHTML = '';
+                // إنشاء زرار "الكل"
+                const allCatsBtn = document.createElement('button');
+                allCatsBtn.className = 'cat-pill';
+                allCatsBtn.id = 'allCats';
+                allCatsBtn.textContent = 'الكل';
+                allCatsBtn.onclick = () => {
+                    renderProducts(); // بدون فلتر => عرض كل المنتجات
+                    document.querySelectorAll('.cat-pill').forEach(el => el.classList.remove('active'));
+                    allCatsBtn.classList.add('active');
+                };
+                catsRow.appendChild(allCatsBtn);
                 categories.forEach(c => {
                     const pill = document.createElement('button');
                     pill.className = 'cat-pill';
